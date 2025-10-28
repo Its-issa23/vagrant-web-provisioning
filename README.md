@@ -26,7 +26,7 @@ Proyecto de práctica para levantar 2 VMs con Vagrant:
 - `provision-db.sh` instala PostgreSQL, configura acceso en la red privada, crea DB `taller` y user `webuser`.
 
 ## Capturas
-(image.png)(image-1.png)
+[image.png] [image-1.png]
 
 ## Credenciales (para pruebas)
 - PostgreSQL user: `webuser`
