@@ -29,5 +29,13 @@ sudo -u postgres psql -c "CREATE DATABASE taller;" || true
 sudo -u postgres psql -c "CREATE USER webuser WITH PASSWORD 'webpass';" || true
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE taller TO webuser;"
 
-echo "===== Creando tabla y d
+echo "===== Creando tabla y datos ====="
+sudo -u postgres psql -d taller -c "CREATE TABLE IF NOT EXISTS estudiantes (id SERIAL PRIMARY KEY, nombre VARCHAR(100));"
+sudo -u postgres psql -d taller -c "INSERT INTO estudiantes (nombre) VALUES ('Danna'), ('Isabella');"
+
+echo "===== Asignando permisos a webuser ====="
+sudo -u postgres psql -d taller -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO webuser;"
+sudo -u postgres psql -d taller -c "GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO webuser;"
+
+echo "===== Provisionamiento DB completado ====="
 
