@@ -1,12 +1,34 @@
-# Taller Vagrant + Provisionamiento con Shell
+# Taller: Vagrant con Provisionamiento (Shell)
 
-## Pasos
-1. Clonar este repositorio.
-2. Ejecutar `vagrant up` para levantar las máquinas.
-3. Acceder a la máquina web en: http://192.168.56.10
-4. Verificar `index.html` y `info.php`.
+## Resumen
+Proyecto de práctica para levantar 2 VMs con Vagrant:
+- web (Apache + PHP)
+- db (PostgreSQL)
 
-## Reto
-- Completar `provision-db.sh` para instalar PostgreSQL.
-- Crear una base de datos y tabla.
-- Conectar la página PHP a la base de datos y mostrar datos.
+## Archivos principales
+- Vagrantfile
+- provision-web.sh
+- provision-db.sh
+- www/index.html
+- www/info.php
+
+## Instrucciones de uso
+1. Clonar repo:
+   `git clone <repo-url>`
+2. Entrar al directorio y levantar VMs:
+   `vagrant up`
+3. Acceder a:
+   - Web: http://192.168.56.10/
+   - Info PHP: http://192.168.56.10/info.php
+
+## Scripts
+- `provision-web.sh` instala Apache, PHP, copia archivos en `/var/www/html`.
+- `provision-db.sh` instala PostgreSQL, configura acceso en la red privada, crea DB `taller` y user `webuser`.
+
+## Capturas
+(image.png)(image-1.png)
+
+## Credenciales (para pruebas)
+- PostgreSQL user: `webuser`
+- PostgreSQL password: `webpass`
+- DB: `taller`

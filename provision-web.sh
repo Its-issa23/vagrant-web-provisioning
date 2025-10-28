@@ -1,17 +1,26 @@
-#!/usr/bin/env bash
+#!/bin/bash
+set -e
 
-# Actualizar paquetes
-sudo apt-get update -y
+# Evita que el sistema pida confirmaciones durante la instalación
+export DEBIAN_FRONTEND=noninteractive
 
-# Instalar Apache y PHP
-sudo apt-get install -y apache2 php libapache2-mod-php
+echo "===== Actualizando paquetes ====="
+apt-get update -y
 
-# Habilitar Apache al inicio
-sudo systemctl enable apache2
-sudo systemctl start apache2
+echo "===== Instalando Apache y PHP ====="
+apt-get install -y apache2 php libapache2-mod-php php-pgsql
 
-# Copiar archivos del proyecto (carpeta compartida Vagrant)
-sudo cp -r /vagrant/www/* /var/www/html/
+echo "===== Habilitando y arrancando Apache ====="
+systemctl enable apache2
+systemctl start apache2
 
-# Dar permisos
-sudo chown -R www-data:www-data /var/www/html
+echo "===== Copiando archivos del sitio web ====="
+# Limpia la carpeta por defecto y copia tus archivos de /vagrant/www (carpeta compartida)
+rm -rf /var/www/html/*
+cp -r /vagrant/www/* /var/www/html/
+chown -R www-data:www-data /var/www/html
+
+echo "===== Reiniciando Apache ====="
+systemctl restart apache2
+
+echo "===== Provisionamiento WEB completado ====="
